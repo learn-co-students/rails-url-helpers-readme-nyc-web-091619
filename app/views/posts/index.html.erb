@@ -1,3 +1,24 @@
+ <!-- <%# in order to factor and use this code to pass a link to the title %>
 <% @posts.each do |post| %>
   <div><%= post.title %></div>
+<% end %>
+
+ <%# this satisfies the above, however it uses multiple erb tags %>
+<% @posts.each do |post| %>
+  <div><a href='<%= "/posts/#{post.id}" %>'><%= post.title %></a></div>
+<% end %>
+
+ <%# we can use the link_to method %>
+<% @posts.each do |post| %>
+  <div><%= link_to post.title, "/posts/#{post.id}" %></div>
+<% end %>
+
+ <%# we can use the _path method to pass in the post.id %>
+<% @posts.each do |post| %>
+  <div><%= link_to post.title, post_path(post.id) %></div>
+<% end %> -->
+
+ <%# rails is smart enought to know to use the id, so can be refactored as below%>
+<% @posts.each do |post| %>
+  <div><%= link_to post.title, post_path(post) %></div>
 <% end %>
